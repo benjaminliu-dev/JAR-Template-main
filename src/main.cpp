@@ -24,6 +24,12 @@ competition Competition;
 /*---------------------------------------------------------------------------*/
 
 
+motor leftMotor1 = motor(PORT1, ratio6_1, false);
+motor leftMotor2 = motor(PORT2, ratio6_1, false);
+motor leftMotor3 = motor(PORT3, ratio6_1, false);
+motor rightMotor1 = motor(PORT7, ratio6_1, true);
+motor rightMotor2 = motor(PORT8, ratio6_1, true);
+motor rightMotor3 = motor(PORT9, ratio6_1, true);
 
 
 Drive chassis(
@@ -47,10 +53,10 @@ ZERO_TRACKER_NO_ODOM,
 //You will input whatever motor names you chose when you configured your robot using the sidebar configurer, they don't have to be "Motor1" and "Motor2".
 
 //Left Motors:
-motor_group(),
+motor_group(leftMotor1, leftMotor2, leftMotor3),
 
 //Right Motors:
-motor_group(),
+motor_group(rightMotor1, rightMotor2, rightMotor3),
 
 //Specify the PORT NUMBER of your inertial sensor, in PORT format (i.e. "PORT1", not simply "1"):
 PORT1,
