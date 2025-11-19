@@ -24,13 +24,15 @@ competition Competition;
 /*---------------------------------------------------------------------------*/
 
 
-motor leftMotor1 = motor(PORT1, ratio6_1, false);
-motor leftMotor2 = motor(PORT2, ratio6_1, false);
-motor leftMotor3 = motor(PORT3, ratio6_1, false);
-motor rightMotor1 = motor(PORT7, ratio6_1, true);
-motor rightMotor2 = motor(PORT8, ratio6_1, true);
-motor rightMotor3 = motor(PORT9, ratio6_1, true);
-
+motor leftMotor1 = motor(PORT11, ratio6_1, false);
+motor leftMotor2 = motor(PORT12, ratio6_1, false);
+motor leftMotor3 = motor(PORT13, ratio6_1, false);
+motor rightMotor1 = motor(PORT20, ratio6_1, true);
+motor rightMotor2 = motor(PORT21, ratio6_1, true);
+motor rightMotor3 = motor(PORT2, ratio6_1, true);
+motor intakeMotor = motor(PORT9, ratio6_1, false);
+motor outtakeMotor = motor(PORT10, ratio6_1, true);
+controller Controller = controller(primary);
 
 Drive chassis(
 
@@ -235,7 +237,21 @@ void usercontrol(void) {
     //Replace this line with chassis.control_tank(); for tank drive 
     //or chassis.control_holonomic(); for holo drive.
     chassis.control_arcade();
+    if (Controller.ButtonL1.pressing()) {
+      intakeMotor.spin(forward);
+    } else if (Controller.ButtonL2.pressing()) {
+      intakeMotor.spin(reverse);
+    } else {
+      intakeMotor.stop();
+    }
 
+    if (Controller.ButtonR1.pressing()) {
+      outtakeMotor.spin(forward);
+    } else if (Controller.ButtonR2.pressing()) {
+      outtakeMotor.spin(reverse);
+    } else {
+      outtakeMotor.stop();
+    } 
     wait(20, msec); // Sleep the task for a short amount of time to
                     // prevent wasted resources.
   }
